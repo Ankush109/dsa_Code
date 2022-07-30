@@ -5,12 +5,15 @@ class node
 public:
     int data;
     node *next;
-    node(int val) // constructor
+
+    // Node Class Constructor
+    node(int val)
     {
         data = val;
         next = NULL;
     }
 };
+
 void insertattail(node *&head, int val)
 {
     node *n = new node(val);
@@ -36,6 +39,7 @@ void display(node *head)
     }
     cout << "NULL" << endl;
 }
+
 void deletion(node *&head, int val)
 {
     node *temp = head;
@@ -119,6 +123,57 @@ node *reversek(node *&head, int k)
     }
     return prevptr;
 }
+void makecycle(node *&head, int pos)
+
+{
+    node *temp = head;
+    node *startnode;
+    int count = 1;
+    while (temp->next != NULL)
+    {
+        if (count == pos)
+        {
+            startnode = temp;
+        }
+        temp = temp->next;
+        count++;
+    }
+    temp->next = startnode;
+}
+bool detectcycle(node *&head)
+{
+    node *slow = head;
+    node *fast = head;
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (fast == slow)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+void removecycle(node *&head)
+{
+    node *slow = head;
+    node *fast = head;
+
+    do
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        /* code */
+    } while (slow != fast);
+    fast = head;
+    while (slow->next != fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+}
 int main()
 {
     node *head = NULL;
@@ -129,16 +184,18 @@ int main()
     insertattail(head, 5);
     insertattail(head, 6);
     insertattail(head, 9);
-    display(head);
-    insertathead(head, 69);
-    display(head);
-    cout << search(head, 5);
-    deleteathead(head);
-    display(head);
-    // node *newhead = reverserecursion(head);
+    // display(head);
+    // insertathead(head, 69);
+    // display(head);
+    // cout << search(head, 5);
+    // deleteathead(head);
+    // display(head);
+    // // node *newhead = reverserecursion(head);
+    // // display(newhead);
+    // int k = 2;
+    // node *newhead = reversek(head, k);
     // display(newhead);
-    int k = 2;
-    node *newhead = reversek(head, k);
-    display(newhead);
-    return 0;
+    // makecycle(head, 3);
+    // display(head);
+    cout << detectcycle(head) << endl;
 }
