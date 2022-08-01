@@ -81,15 +81,50 @@ void intersect(node *&head1, node *&head2, int pos)
     }
     temp2->next = temp1;
 }
+node *merge(node *&head1, node *&head2)
+{
+    node *p1 = head1;
+    node *p2 = head2;
+    node *dummynode = new node(-1);
+    node *p3 = dummynode;
+    while (p1 != NULL && p2 != NULL)
+    {
+        if (p1->data < p2->data)
+        {
+            p3->next = p1;
+            p1 = p1->next;
+        }
+        else
+        {
+            p3->next = p2;
+            p2 = p2->next;
+        }
+        p3 = p3->next;
+    }
+
+    while (p1 != NULL)
+    {
+        p3->next = p1;
+        p1 = p1->next;
+        p3 = p3->next;
+    }
+    while (p2 != NULL)
+    {
+        p3->next = p2;
+        p2 = p2->next;
+        p3 = p3->next;
+    }
+    return dummynode->next;
+}
 void insertattail(node *&head1, int val)
 {
     node *n = new node(val);
-    if (head == NULL)
+    if (head1 == NULL)
     {
-        head = n;
+        head1 = n;
         return;
     }
-    node *temp = head;
+    node *temp = head1;
     while (temp->next != NULL)
     {
         temp = temp->next;
@@ -109,16 +144,34 @@ void display(node *head)
 
 int main()
 {
-    insertattail(head1, 5);
-    insertattail(head1, 5);
-    insertattail(head1, 5);
-    insertattail(head2, 4);
-    insertattail(head2, 9);
-    insertattail(head2, 3);
-    insertattail(head2, 1);
-    intersect(head1, head2, 3);
+
+    node *head1 = NULL;
+    node *head2 = NULL;
+
+    int arr1[] = {1, 2, 3, 4, 5};
+    int arr2[] = {6, 7, 8, 9, 10};
+    for (int i = 0; i < 5; i++)
+    {
+        insertattail(head1, arr1[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        insertattail(head2, arr2[i]);
+    }
+    // insertattail(head1, 5);
+    // insertattail(head1, 5);
+    // insertattail(head1, 5);
+    // insertattail(head2, 4);
+    // insertattail(head2, 9);
+    // insertattail(head2, 3);
+    // insertattail(head2, 1);
+    // intersect(head1, head2, 3);
+    // display(head1);
+    // display(head2);
+    // cout << intersection(head1, head2) << endl;
+    // return 0;
     display(head1);
     display(head2);
-    cout << intersection(head1, head2) << endl;
-    return 0;
+    node *newhead = merge(head1, head2);
+    display(newhead);
 }

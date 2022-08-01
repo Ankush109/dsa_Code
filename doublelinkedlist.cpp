@@ -14,7 +14,42 @@ public:
         prev = NULL;
     }
 };
-
+int length(node *head)
+{
+    int l = 0;
+    node *temp = head;
+    while (temp != NULL)
+    {
+        l++;
+        temp = temp->next;
+    }
+    return l;
+}
+node *kappend(node *&head, int k)
+{
+    node *newhead;
+    node *newtail;
+    node *tail = head;
+    int l = length(head);
+    k = k % l;
+    int count = 1;
+    while (tail->next != NULL)
+    {
+        if (count == l - k)
+        {
+            newtail = tail;
+        }
+        if (count = l - k + 1)
+        {
+            newhead = tail;
+        }
+        tail = tail->next;
+        count++;
+    }
+    newtail->next = NULL;
+    tail->next = head;
+    return newhead;
+}
 void inserathead(node *&head, int val)
 
 {
@@ -85,19 +120,29 @@ void deletion(node *&head, int pos)
 int main()
 {
 
+    // node *head = NULL;
+    // insertattail(head, 2);
+    // insertattail(head, 3);
+    // insertattail(head, 4);
+    // insertattail(head, 5);
+    // insertattail(head, 6);
+    // insertattail(head, 7);
+    // insertattail(head, 8);
+    // // display(head);
+    // // inserathead(head, 6);
+    // // deletion(head, 4);
+    // // display(head);
+    // deleteathead(head);
+    // display(head);
+    // return 0;
+
     node *head = NULL;
-    insertattail(head, 2);
-    insertattail(head, 3);
-    insertattail(head, 4);
-    insertattail(head, 5);
-    insertattail(head, 6);
-    insertattail(head, 7);
-    insertattail(head, 8);
-    // display(head);
-    // inserathead(head, 6);
-    // deletion(head, 4);
-    // display(head);
-    deleteathead(head);
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
+    for (int i = 0; i < 6; i++)
+    {
+        insertattail(head, arr[i]);
+    }
     display(head);
-    return 0;
+    node *newehead = kappend(head, 3);
+    display(head);
 }
