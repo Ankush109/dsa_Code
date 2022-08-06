@@ -115,7 +115,22 @@ void deletion(node *&head, int pos)
         temp->next->prev = temp->prev;
     }
     delete temp;
+    .7
 }
+// void evenafterhead(node *&head)
+// {
+//     node *odd = head;
+//     node *even = head->next;
+//     node *evenstart = even;
+//     while (odd->next != NULL && even->next != NULL)
+//     {
+//         odd->next = even->next;
+//         odd = odd->next;
+//         even->next = odd->next;
+//         even = even->next;
+//     }
+//     odd
+// }
 
 int main()
 {
