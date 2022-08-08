@@ -47,7 +47,7 @@ void deletion(node *&head, int val)
     {
         temp = temp->next;
     }
-    node *todelete = temp->next;
+    node *todelete = temp->next; // 1->2->3->5->6->NULL
     temp->next = temp->next->next;
     delete todelete;
 }
@@ -55,7 +55,7 @@ void insertathead(node *&head, int val)
 {
 
     node *n = new node(val);
-    n->next = head;
+    n->next = head; // 4 -> 2 3 4 5
     head = n;
 }
 bool search(node *head, int key)
@@ -80,10 +80,10 @@ node *reverse(node *&head)
     {
         nextptr = currentptr->next;  // 1 -> 2
         currentptr->next = prevpter; // prev=1 cur=2
-        prevpter = currentptr;
+        prevpter = currentptr;       // shifting all the pointer by one step
         currentptr = nextptr;
     }
-    return prevpter;
+    return p revpter;
 }
 node *reverserecursion(node *head)
 {
