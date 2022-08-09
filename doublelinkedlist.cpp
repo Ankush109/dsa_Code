@@ -115,7 +115,6 @@ void deletion(node *&head, int pos)
         temp->next->prev = temp->prev;
     }
     delete temp;
-    .7
 }
 // void evenafterhead(node *&head)
 // {

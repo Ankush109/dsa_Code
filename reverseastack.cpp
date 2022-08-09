@@ -18,10 +18,11 @@ void reverse(stack<int> &st)
     if (st.empty())
     {
         return;
-    }
-    int ele = st.top();
-    st.pop();
-    reverse(st);
+        }
+    int ele = st.top(); // storing the top element
+    st.pop();           // removing the top most element
+    reverse(st);        // recurive call for reversing the remaining elements in the stack
+                        // after being reversed : -
     insertatbottom(st, ele);
 }
 int main()
