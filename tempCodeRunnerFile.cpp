@@ -1,2 +1,2 @@
- // st.pop();
-    // cout << st.top() << endl;
+ if (!st.empty())
+        return false;
