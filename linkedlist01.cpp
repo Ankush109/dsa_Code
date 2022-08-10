@@ -83,7 +83,7 @@ node *reverse(node *&head)
         prevpter = currentptr;       // shifting all the pointer by one step
         currentptr = nextptr;
     }
-    return p revpter;
+    return prevpter;
 }
 node *reverserecursion(node *head)
 {

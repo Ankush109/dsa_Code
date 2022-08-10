@@ -2,21 +2,21 @@
 #include <stack>
 #include <math.h>
 using namespace std;
-int prefixevaluation(string s)
+int postfixevaluation(string s)
 {
     stack<int> st;
-    for (int i = s.length() - 1; i >= 0; i--)
+    for (int i = 0; i < s.length(); i++)
     {
-        /* code */
+
         if (s[i] >= '0' && s[i] <= '9')
         {
-            st.push(s[i] - '0');
+            st.push(s[i] - '0'); // to convert character to integer
         }
-        elseyes
+        else
         {
-            int op1 = st.top();
-            st.pop();
             int op2 = st.top();
+            st.pop();
+            int op1 = st.top();
             st.pop();
             switch (s[i])
             {
@@ -26,6 +26,7 @@ int prefixevaluation(string s)
             case '-':
                 st.push(op1 - op2);
                 break;
+
             case '*':
                 st.push(op1 * op2);
                 break;
@@ -42,6 +43,6 @@ int prefixevaluation(string s)
 }
 int main()
 {
-    cout << prefixevaluation("-+7*45+20") << endl;
+    cout << postfixevaluation("46+2/5*7+") << endl;
     return 0;
 }
