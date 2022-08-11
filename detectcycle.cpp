@@ -1,1 +1,0 @@
-// flyoid's algorithm
