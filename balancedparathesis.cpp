@@ -72,11 +72,11 @@ using namespace std;
 bool areBracketsBalanced(string expr)
 {
     stack<char> temp;
-    for (int i = 0; i < expr.length(); i++)
+    for (int i = 0; i < expr.length(); i++) //
     {
         if (temp.empty())
         {
-            temp.push(expr[i]);
+            temp.push(expr[i]); // pushing  the { ( [  in the stack
         }
         else if ((temp.top() == '(' && expr[i] == ')') || (temp.top() == '{' && expr[i] == '}') || (temp.top() == '[' && expr[i] == ']'))
         {
@@ -89,7 +89,7 @@ bool areBracketsBalanced(string expr)
     }
     if (temp.empty())
     {
-        return true;
+        return true; // is valid
     }
     return false;
 }
