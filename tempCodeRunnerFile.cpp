@@ -1,2 +1,1 @@
- if (!st.empty())
-        return false;
+    // reverse(ros);
