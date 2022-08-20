@@ -60,7 +60,7 @@ void recursive_insertion_sorted_order(S_LINKED_LIST **aa_head, int n)
     {
         /* next part of the new node will point to the existing head nde.*/
         t->nxt = *aa_head;
-        aa_head = t; /* New node will become head node. */
+        *aa_head = t; /* New node will become head node. */
     }
     else
         recursive_insertion_sorted_order(&(*aa_head)->nxt, n);
@@ -209,64 +209,10 @@ void search(S_LINKED_LIST *aa_head, int x)
 void main()
 {
     S_LINKED_LIST *L = NULL;
-    printf("\nInsertion in sorted order:");
-    initialisation(&L);
-    insertion_sorted_order(&L, 8);
-    insertion_sorted_order(&L, 6);
-    insertion_sorted_order(&L, 3);
+
+    recursive_insertion_sorted_order(&L, 1);
+    recursive_insertion_sorted_order(&L, 69);
+    recursive_insertion_sorted_order(&L, 6);
+    recursive_insertion_sorted_order(&L, 3);
     display(L);
-    search(L, 6);
-    search(L, 65);
-    printf("Deleting an Element:");
-    deletion(&L, 6);
-    display(L);
-    printf("Count of linked list:");
-    int j = count(L);
-    printf(" %d\n", j);
-    printf("Reverse of linked list:");
-    reverse(&L);
-    display(L);
-    S_LINKED_LIST *L1 = NULL;
-    S_LINKED_LIST *L2 = NULL;
-    S_LINKED_LIST *L3 = NULL;
-    initialisation(&L1);
-    int k = 0;
-    printf("Insertion in serial order:");
-    insertion_serial_order(&L1, 53);
-    insertion_serial_order(&L1, 7);
-    insertion_serial_order(&L1, 2);
-    display(L1);
-    printf("Deleting an Element:");
-    deletion(&L1, 6);
-    display(L1);
-    printf("Count of linked list using recursion:");
-    k = recursive_count(L1);
-    printf(" %d\n", k);
-    printf("Reverse of linked list:");
-    reverse(&L1);
-    display(L1);
-    printf("Spliting a link list:");
-    split_and_display(L1, &L2, &L3);
-    S_LINKED_LIST *L4 = NULL;
-    S_LINKED_LIST *L5 = NULL;
-    initialisation(&L4);
-    initialisation(&L5);
-    recursive_insertion_sorted_order(&L4, 13);
-    recursive_insertion_sorted_order(&L4, 5);
-    printf("\nInsertion in sorted order using recursive tecnique:");
-    display(L4);
-    printf("Merging two sorted linked list:");
-    merge_and_display(L, L4, &L5);
-    S_LINKED_LIST *L6 = NULL;
-    S_LINKED_LIST *L7 = NULL;
-    initialisation(&L6);
-    initialisation(&L7);
-    recursive_insertion_serial_order(&L6, 65);
-    recursive_insertion_serial_order(&L6, 93);
-    printf("\nInsertion in serial order using recursive technique:");
-    display(L6);
-    printf("\nMerging two serial ordered linked list:");
-    alternative_merge_and_display(L1, L6, &L7);
-    printf("Reverse of linked list using recursive technique:");
-    recursive_reverse(L6);
 }

@@ -62,8 +62,7 @@ void main()
     addQueue(14, &Q);
     addQueue(15, &Q);
     addQueue(16, &Q);
-    while (deleteQueue(&data, &Q) == 1)
-        printf("\n Data  : %d", data);
-
+    deleteQueue(&data, &Q);
+    printf("\n %d", data);
     printf("\n Empty Queue...");
 }
