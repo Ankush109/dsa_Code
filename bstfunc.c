@@ -48,6 +48,97 @@ void insertion_iterative(BS_TREE **aar, int n)
             par->right = t;
     }
 }
+void rec_insert(BS_TREE **aar, int n)
+{
+    if (*aar == NULL)
+    {
+        *aar = (BS_TREE *)malloc(sizeof(BS_TREE));
+        (*aar)->data = n;
+        (*aar)->left = (*aar)->right = NULL;
+    }
+    else if (n < (*aar)->data)
+        rec_insert(&((*aar)->left), n);
+    else
+        rec_insert(&((*aar)->right), n);
+}
+int recursive_search(BS_TREE *ar, int n)
+{
+    if (ar != NULL)
+    {
+        if (ar->data == n)
+        {
+            printf("\n Data found...");
+            return (1);
+        }
+        else if (n > ar->data)
+            recursive_search(ar->right, n);
+        else
+            recursive_search(ar->left, n);
+    }
+    else
+    {
+        printf("\n Data not found..");
+        return (0);
+    }
+}
+void mirror_image(BS_TREE **aar)
+{
+    BS_TREE *t;
+    if (*aar != NULL)
+    {
+        mirror_image(&(*aar)->left);
+        mirror_image(&(*aar)->right);
+        t = (*aar)->left;
+        (*aar)->left = (*aar)->right;
+        (*aar)->right = t;
+    }
+}
+int total_nodes(BS_TREE *t)
+{
+    if (t == NULL)
+        return 0;
+    else
+        return (total_nodes(t->left) + total_nodes(t->right) + 1);
+}
+int leaf_nodes(BS_TREE *t)
+{
+    if (t == NULL)
+        return 0;
+    else if (t->left == NULL && t->right == NULL)
+        return 1;
+    else
+        return (leaf_nodes(t->left) + leaf_nodes(t->right));
+}
+int internal_nodes(BS_TREE *t)
+{
+    if ((t == NULL) || (t->left == NULL && t->right == NULL))
+        return 0;
+    else
+        return (internal_nodes(t->left) + internal_nodes(t->right) + 1);
+}
+BS_TREE *find_smallest(BS_TREE *t)
+{
+    if ((t == NULL) || t->left == NULL)
+        return t;
+    else
+        return find_smallest(t->left);
+}
+BS_TREE *find_largest(BS_TREE *t)
+{
+    if ((t == NULL) || t->right == NULL)
+        return t;
+    else
+        return find_largest(t->right);
+}
+void remove_tree_memory(BS_TREE **aar)
+{
+    if (*aar != NULL)
+    {
+        remove_tree_memory(&(*aar)->left);
+        remove_tree_memory(&(*aar)->right);
+        free(*aar);
+    }
+}
 void preorder(BS_TREE *ar)
 {
 
@@ -118,9 +209,9 @@ void main()
 
     printf("Preorder:\n");
     preorder(B);
-    printf("Inorder:\n");
+    printf("\nInorder:\n");
     inorder(B);
-    printf("Postorder: \n");
+    printf("\nPostorder:\n");
     postorder(B);
 
     display(B, a);

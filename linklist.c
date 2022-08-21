@@ -209,10 +209,64 @@ void search(S_LINKED_LIST *aa_head, int x)
 void main()
 {
     S_LINKED_LIST *L = NULL;
+    int choice;
+    int data;
+    printf("enter your choice\n");
+    printf("1.insertion\n");
+    printf("2.deletion\n");
+    printf("3.display\n");
+    printf("4.count\n");
+    printf("5.reverse\n");
+    printf("6.split and display\n");
+    printf("7.merge and display\n");
+    printf("8.alternative merge and display\n");
+    printf("9.search\n");
+    printf("10.exit\n");
+    while (1)
+    {
+        printf("enter your choice\n");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("enter the data\n");
+            scanf("%d", &data);
+            insertion_serial_order(&L, data);
 
-    recursive_insertion_sorted_order(&L, 1);
-    recursive_insertion_sorted_order(&L, 69);
-    recursive_insertion_sorted_order(&L, 6);
-    recursive_insertion_sorted_order(&L, 3);
-    display(L);
+            break;
+        case 2:
+            printf("enter the data you want to delete\n");
+            scanf("%d", &data);
+            deletion(&L, data);
+            break;
+        case 3:
+            printf("displaying the data of the linked list\n");
+            display(L);
+            break;
+        case 4:
+            printf("\n count = %d\n", count(L));
+            break;
+        case 5:
+            recursive_reverse(L);
+            break;
+        case 6:
+            split_and_display(L, &L, &L);
+            break;
+        case 7:
+            merge_and_display(L, L, &L);
+            break;
+        // case 8:
+        //     alternative_merge_and_display(L, L, &L);
+        //     break;
+        case 9:
+            printf("enter the element you want to search\n");
+            scanf("%d", &data);
+            search(L, data);
+            break;
+        case 10:
+            exit(0);
+        default:
+            printf("\n invalid choice\n");
+        }
+    }
 }
