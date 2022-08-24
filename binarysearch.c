@@ -10,6 +10,7 @@ void sorted(int arr[], int n)
 {
     for (int i = 0; i < n; i++)
     {
+        // selection sort
         int min = i;
         for (int j = i + 1; j < n; j++)
         {

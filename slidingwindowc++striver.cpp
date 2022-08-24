@@ -7,7 +7,7 @@ public:
         vector<int> s;
         for (int i = 0; i < nums.size(); i++)
         {
-            if (!dq.empty() && dq.front() == i - k)
+            if (!dq.empty() && dq.front() == i - k) // out of bound elements will be removed
                 dq.pop_front();
             while (!dq.empty() && nums[dq.back()] < nums[i])
             {
