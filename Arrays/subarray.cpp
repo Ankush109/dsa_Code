@@ -13,12 +13,12 @@ int main()
     }
     for (int i = 0; i < n; i++)
     {
+        int sum = 0;
+
         for (int j = i; j < n; j++)
         {
-            for (int k = i; k <= j; k++)
-            {
-                cout << arr[k] << " ";
-            }
+            sum += arr[j];
+            cout << sum;
             cout << endl;
         }
     }
