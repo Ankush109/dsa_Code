@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 void sub(vector<int> &a, int i, int arr[], int n)
+
 {
 
     if (i == n)
