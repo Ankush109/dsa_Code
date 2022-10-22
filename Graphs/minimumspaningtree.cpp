@@ -1,44 +1,44 @@
 class Solution
 {
 public:
-    bool isdirectedcycle(int i, vector<int> adj[], int vis[], int dfsvis[])
+    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
     {
-        vis[i] = 1;
-        dfsvis[i] = 1;
-        for (auto it : adj[i])
-        {
-            if (!vis[it])
-            {
-                if (isdirectedcycle(it, adj, vis, dfsvis))
-                {
-                    return true;
-                }
-            }
-            else if (dfsvis[it])
-            {
-                return true;
-            }
-        }
-        dfsvis[i] = 0;
-        return false;
-    }
-    // Function to detect cycle in a directed graph.
-    bool isCyclic(int V, vector<int> adj[])
-    {
-        int vis[V];
-        int dfsvis[V];
-        memset(vis, 0, sizeof vis);
-        memset(dfsvis, 0, sizeof dfsvis);
+        int key[V];
+
+        bool mstset[V];
         for (int i = 0; i < V; i++)
         {
-            if (!vis[i])
+            key[i] = INT_MAX;
+            mstset[i] = false;
+        }
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+        pq.push({0, 0});
+        key[0] = 0;
+        while (!pq.empty())
+        {
+            int u = pq.top().second;
+            pq.pop();
+            mstset[u] = true;
+            for (auto it : adj[u])
             {
-                if (isdirectedcycle(i, adj, vis, dfsvis))
+                int v = it[0];
+                int weight = it[1];
+                if (mstset[v] == false && weight < key[v])
                 {
-                    return true;
+
+                    key[v] = weight;
+                    pq.push({key[v], v});
                 }
             }
         }
-        return false;
+        int sum = 0;
+        for (int i = 0; i < V; i++)
+        {
+
+            sum += key[i];
+        }
+        return sum;
     }
 };
