@@ -79,6 +79,7 @@ void push(struct sNode **top_ref, TNode *t)
         printf("Stack Overflow \n");
         getchar();
         exit(0);
+        -
     }
     new_TNode->t = t;
     new_TNode->next = (*top_ref);
@@ -160,60 +161,3 @@ TNode *deleteIterative(TNode *root, int data)
         TNode *p = NULL;
         TNode *temp;
         temp = curr->right;
-        while (temp->left != NULL)
-        {
-            p = temp;
-            temp = temp->left;
-        }
-        if (p != NULL)
-            p->left = temp->right;
-        else
-            curr->right = temp->right;
-        curr->data = temp->data;
-        free(temp);
-    }
-    return root;
-}
-void main()
-{
-    TNode *a = NULL;
-    initialise_tree(&a);
-    int elements;
-    int i;
-    printf("Enter the number of elements to insert in the tree: \n");
-    scanf("%d", &elements);
-    printf("Enter the data: \n");
-    for (i = 0; i < elements; i++)
-    {
-        int data;
-        scanf("%d", &data);
-        rec_insert(&a, data);
-    }
-    while (1)
-    {
-        printf("\nEnter 1 for inorder traversal\nEnter 2 for preorder traversal\nEnter 3 for deletion\nEnter 4 to exit\n");
-        printf("Enter your choice: ");
-        int ch, n;
-        scanf("%d", &ch);
-        switch (ch)
-        {
-        case 1:
-            printf("\nInorder: \n");
-            inorder(a);
-            break;
-        case 2:
-            printf("\nPre order: \n");
-            preorder(a);
-            break;
-        case 3:
-            printf("Enter the node to delete: ");
-            scanf("%d", &n);
-            a = deleteIterative(a, n);
-            break;
-        case 4:
-            exit(0);
-        default:
-            printf("Wrong choice");
-        }
-    }
-}

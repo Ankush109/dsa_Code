@@ -1,51 +1,74 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct ll
+struct queue
 {
-    int data;
-    struct ll *nxt;
-} Queue;
+    int size;
+    int f;
+    int r;
+    int *arr;
+};
 
-void enqueue(Queue **qp, int data)
+int isEmpty(struct queue *q)
 {
-    if (*qp == NULL)
+    if (q->r == q->f)
     {
-        Queue *temp = (Queue *)malloc(sizeof(Queue));
-        temp->data = data;
-        temp->nxt = NULL;
-        *qp = temp;
-        return;
+        return 1;
     }
-    enqueue(&(*qp)->nxt, data);
+    return 0;
 }
 
-int dequeue(Queue **qp)
+int isFull(struct queue *q)
 {
-    int data = (*qp)->data;
-    *qp = (*qp)->nxt;
-    return data;
+    if (q->r == q->size - 1)
+    {
+        return 1;
+    }
+    return 0;
 }
 
-int isEmpty(Queue *qp)
+void enqueue(struct queue *q, int val)
 {
-    return (qp == NULL);
+    if (isFull(q))
+    {
+        printf("This Queue is full\n");
+    }
+    else
+    {
+        q->r++;
+        q->arr[q->r] = val;
+        // printf("Enqued element: %d\n", val);
+    }
 }
-
-void initialise(int v, int graph[v][v], int visited[v])
+int dequeue(struct queue *q)
+{
+    int a = -1;
+    if (isEmpty(q))
+    {
+        printf("This Queue is empty\n");
+    }
+    else
+    {
+        q->f++;
+        a = q->arr[q->f];
+    }
+    return a;
+}
+// create a graph using user input
+void createGraph(int v, int graph[v][v])
 {
     int i, j;
     for (i = 0; i < v; i += 1)
     {
-        visited[v] = 0;
         for (j = 0; j < v; j += 1)
         {
-            graph[i][j] = 0;
+            printf("Is there an edge between %d and %d? (1/0): ", i, j);
+            scanf("%d", &graph[i][j]);
         }
     }
 }
-
-void printgraph(int v, int graph[v][v])
+// print the graph
+void printGraph(int v, int graph[v][v])
 {
     int i, j;
     for (i = 0; i < v; i += 1)
@@ -57,54 +80,51 @@ void printgraph(int v, int graph[v][v])
         printf("\n");
     }
 }
-
-void creategraph(int v, int graph[v][v])
-{
-    int connect, i, j;
-    for (i = 0; i < v; i += 1)
-    {
-        for (j = 0; j < v; j += 1)
-        {
-            if (i == j)
-                continue;
-            printf("Connection from %d to %d (1 to connect, 0 to disconnect) -> ", i, j);
-            scanf("%d", &connect);
-            graph[i][j] = connect;
-        }
-    }
-}
-
-void bfs(int v, int graph[v][v], int visited[v], int start, Queue *qp)
-{
-    printf("Enter starting vertex: ");
-    scanf("%d", &start);
-    visited[start] = 1;
-    int i;
-    enqueue(&qp, start);
-    while (!isEmpty(qp))
-    {
-        int n = dequeue(&qp);
-        printf("%d ", n);
-        visited[n] = 1;
-        for (i = 0; i < v; i += 1)
-        {
-            if (graph[n][i] == 1 && !visited[i])
-                enqueue(&qp, i);
-        }
-    }
-    printf("\n");
-}
-
 int main()
 {
-    Queue *qp = NULL;
-    int v, start;
-    printf("Enter number of vertices: ");
+    struct queue q;
+
+    int v, i, j;
+    printf("Enter the number of vertices: ");
     scanf("%d", &v);
-    int graph[v][v], visited[v];
-    initialise(v, graph, visited);
-    creategraph(v, graph);
-    bfs(v, graph, visited, start, qp);
-    printgraph(v, graph);
+    int graph[v][v];
+    createGraph(v, graph);
+    printf("The graph is:");
+    printGraph(v, graph);
+    // vis array to keep track of visited nodes
+    int vis[v];
+    for (i = 0; i < v; i += 1)
+    {
+        vis[i] = 0;
+    }
+    // queue to keep track of nodes to be visited
+
+    q.size = 100;
+    q.f = q.r = 0;
+    q.arr = (int *)malloc(q.size * sizeof(int));
+    // start from node 0
+    int node;
+    int s;
+    printf("enter starting index");
+    scanf("%d", &s);
+    printf("%d", s);
+    vis[s] = 1;
+    enqueue(&q, s);
+
+    while (!isEmpty(&q))
+    {
+        int node = dequeue(&q);
+
+        for (int i = 0; i < v; i++)
+        {
+            if (graph[node][i] == 1 && vis[i] == 0)
+            {
+                printf(" -> %d ", i);
+                vis[i] = 1;
+                enqueue(&q, i);
+            }
+        }
+    }
     return 0;
 }
+//{0, 1, 1, 0}, {0, 0, 1, 0}, {1, 0, 0, 1}, {0, 0, 0, 1}

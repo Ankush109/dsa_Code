@@ -1,3 +1,5 @@
+// solved using prims algorithm
+
 class Solution
 {
 public:

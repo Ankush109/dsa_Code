@@ -3,6 +3,7 @@ void dfsbridge(int node, int parent, vector<int> &vis, vector<int> &tim, vector<
     vis[node] = 1;
     tim[node] = low[node] = timer++;
     for (auto it : adj[node])
+
     {
         if (it == parent)
             continue;
@@ -16,7 +17,8 @@ void dfsbridge(int node, int parent, vector<int> &vis, vector<int> &tim, vector<
             }
             else
             {
-                low[node] = min(low[node], tin[it]);`
+                low[node] = min(low[node], tin[it]);
+                `
             }
         }
     }
